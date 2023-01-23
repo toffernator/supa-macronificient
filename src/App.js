@@ -8,7 +8,7 @@ import { supabase } from './supabaseClient';
 
 function App() {
   let [foods, setFoods] = useState([]);
-  let [isShowingPopup, setShowPopup] = useState(true)
+  let [isShowingPopup, setShowPopup] = useState(false)
   
   const handleFoodFormSubmit = (food) => {
     setFoods([...foods, food])

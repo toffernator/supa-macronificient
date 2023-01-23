@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "../supabaseClient"
 import AmountInput from "./AmountInput";
 import BaseInput from "./inputs/BaseInput";
+import PrimaryButton from "./PrimaryButton";
 
 export default function FoodForm(props) {
   let [searchText, setSearchText] = useState("")
@@ -68,7 +69,8 @@ export default function FoodForm(props) {
     <form className="flex flex-col justify-items-stretch" onSubmit={handleSubmit}>
       <BaseInput name="search" type="search" value={searchText} onChange={handleSearchTextChange} placeholder="Enter a food..."/>
       <AmountInput onUnitChange={handleUnitChange} unitValue={unit} onAmountChange={handleAmountChange} amountValue={amount} />
-      <button type="submit" className="m-2 p-1 bg-gradient-to-r from-indigo-500 to-pink-500 shadow-md rounded-lg text-white" >Add</button>
+      {/* <button type="submit" className="m-2 p-1 bg-gradient-to-r from-indigo-500 to-pink-500 shadow-md rounded-lg text-white" >Add</button> */}
+      <PrimaryButton type="submit" text="Add"/>
     </form>
   )
 }

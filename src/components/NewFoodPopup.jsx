@@ -2,6 +2,8 @@ import { useState } from "react"
 import AmountInput from "./AmountInput"
 import NumberInput from "./inputs/NumberInput"
 import BaseInput from "./inputs/BaseInput"
+import PrimaryButton from "./PrimaryButton"
+import DangerButton from "./DangerButton"
 
 export default function NewFoodPopup(props) {
   
@@ -43,7 +45,10 @@ export default function NewFoodPopup(props) {
   return (
     <div className="fixed h-full w-full left-0 top-0 none bg-gray-700/50 flex items-center justify-center">
       <div className="flex flex-col mx-auto p-1 bg-white border-2 border-solid border-black rounded-md shadow-lg">
-        <button type="button" className="border-solid border-2 border-black" onClick={props.onClose}>X</button>
+        <div className="flex justify-between">
+          <h2 className="m-2 p-1 text-xl">Add a New Food</h2>
+          <DangerButton onClick={props.onClose} text="X" />
+        </div>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <BaseInput name="name" type="text" placeholder="name" value={food.name} onChange={handleNameChange} />
           <NumberInput name="calories" placeholder="calories" value={food.calories} onChange={handleCaloriesChange} />
@@ -51,7 +56,8 @@ export default function NewFoodPopup(props) {
           <NumberInput name="protein" placeholder="protein" value={food.protein} onChange={handleProteinChange}/>
           <NumberInput name="fat" placeholder="fat" className="m-2 p-1" value={food.fat} onChange={handleFatChange}/>
           <AmountInput unitValue={food.unit} amountValue={food.amount} onUnitChange={handleUnitChange} onAmountChange={handleAmountChange}/>
-          <button type="submit" className="border-solid border-2 border-black">Add</button>
+          <PrimaryButton type="submit" text="Add" />
+          {/* <button type="submit" className="border-solid border-2 border-black">Add</button> */}
         </form>
       </div>
     </div>

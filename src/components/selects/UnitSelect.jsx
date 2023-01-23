@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { supabase } from "../../supabaseClient"
 import BaseSelect from "./BaseSelect"
 import PropTypes from "prop-types"
+import { toCapatilized } from "../../util"
 
 const UnitSelect = (props) => {
   let [units, setUnits] = useState([])
@@ -18,7 +19,7 @@ const UnitSelect = (props) => {
         }
         
         let units = data.map((unit) => { 
-          return { value: unit.id, name: (unit.name)} 
+          return { value: unit.id, name: toCapatilized(unit.name)} 
         })
         setUnits(units)
       } catch(error) {
