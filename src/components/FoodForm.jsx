@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient"
 import AmountInput from "./AmountInput";
+import BaseInput from "./inputs/BaseInput";
 
 export default function FoodForm(props) {
   let [searchText, setSearchText] = useState("")
@@ -12,22 +13,26 @@ export default function FoodForm(props) {
   }
   
   const handleAmountChange = (e) => {
-    setAmount(parseFloat(e.target.value))
+    // Cast to int here (and not on the underlying component like NumberInput) because the int conversion on e.target.value does not "stick"
+    // i.e. it still arrives here as a string otherwise.
+    let asFloat = parseFloat(e.target.value)
+    setAmount(asFloat)
   }
 
   const handleUnitChange = (e) => {
-    setUnit(parseInt(e.target.value))
+    // Cast to int here (and not on the underlying component like NumberInput) because the int conversion on e.target.value does not "stick"
+    // i.e. it still arrives here as a string otherwise.
+    let asInt = parseInt(e.target.value)
+    setUnit(asInt)
   }
   
   const handleSubmit = async (e) => {
     e.preventDefault()
     let food = await getFood(searchText)
-    console.log(food)
-    food = scaleFood(food, amount)
-    console.log(food)
     if (food === null) {
       props.showPopup(food)
     } else {
+      food = scaleFood(food, amount)
       props.onSubmit(food)
     }
   }
@@ -52,14 +57,18 @@ export default function FoodForm(props) {
 
   const scaleFood = (food, newAmount) => {
     let scalar = newAmount / food.amount
-    return {...food, calories: food.calories * scalar, carbohydrates: food.carbohydrates * scalar, protein: food.protein * scalar, fat: food.fat * scalar, amount: newAmount}
+    return {
+      ...food, calories: food.calories * scalar, carbohydrates: food.carbohydrates * scalar, protein: food.protein * scalar,
+      fat: food.fat * scalar, amount: newAmount
+    }
+
   }
 
   return (
-    <form className="flex" onSubmit={handleSubmit}>
-      <input type="search" value={searchText} className="m-2 p-1 border-black border w-4/5" onChange={handleSearchTextChange}/>
+    <form className="flex flex-col justify-items-stretch" onSubmit={handleSubmit}>
+      <BaseInput name="search" type="search" value={searchText} onChange={handleSearchTextChange} placeholder="Enter a food..."/>
       <AmountInput onUnitChange={handleUnitChange} unitValue={unit} onAmountChange={handleAmountChange} amountValue={amount} />
-      <button type="submit" className="m-2 p-1 w-1/5 bg-gradient-to-r from-indigo-500 to-pink-500 shadow-md rounded-lg text-white" >submit</button>
+      <button type="submit" className="m-2 p-1 bg-gradient-to-r from-indigo-500 to-pink-500 shadow-md rounded-lg text-white" >Add</button>
     </form>
   )
 }

@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react"
-import { supabase } from "../supabaseClient"
+import PropTypes from "prop-types"
+import NumberInput from "./inputs/NumberInput"
+import UnitSelect from "./selects/UnitSelect"
 
-export default function AmountInput(props) {
-  let [units, setUnits] = useState([])
-
-  useEffect(() => {
-    async function getUnits() {
-      try {
-        const { data, error, status } = await supabase
-          .from("units")
-          .select("*")
-
-        if (error && status !== 406) {
-          throw error
-        }
-
-        setUnits(data)
-      } catch(error) {
-        alert(error)
-      }
-    }
-    
-    if (units.length === 0) {
-      getUnits()
-    }
-  }, [])
-  
+const AmountInput = (props) => {
   return (
-    <div className="flex">
-      <input type="number" step="any" name={props.inputName} placeholder="amount" value={props.amountValue} onChange={props.onAmountChange} className="m-2 p-1 border-2 border-solid border-black"/>
-      <select name={props.selectName} value={props.unitValue} onChange={props.onUnitChange}>
-        {units.map((unit) => <option key={unit.id} value={unit.id}>{unit.name}</option>)}
-      </select>
-    </div>
+    <>
+      <NumberInput name="amount" placeholder="Amount" value={props.amountValue} onChange={props.onAmountChange} />
+      <UnitSelect name="unit" value={props.unitValue} onChange={props.onUnitChange} />
+    </>
   )
 }
+
+AmountInput.propTypes = {
+  amountValue: PropTypes.number,
+  unitValue: PropTypes.number,
+  onAmountChange: PropTypes.func,
+  onUnitChange: PropTypes.func
+}
+
+export default AmountInput
+

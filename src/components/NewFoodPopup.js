@@ -1,5 +1,7 @@
 import { useState } from "react"
 import AmountInput from "./AmountInput"
+import NumberInput from "./inputs/NumberInput"
+import BaseInput from "./inputs/BaseInput"
 
 export default function NewFoodPopup(props) {
   
@@ -39,15 +41,15 @@ export default function NewFoodPopup(props) {
   }
 
   return (
-    <div className="fixed h-full w-full left-0 top-0 none bg-gray-700 opacity-50 flex items-center justify-center">
-      <div className="flex flex-col mx-auto p-1 bg-red-200 opacity-100">
+    <div className="fixed h-full w-full left-0 top-0 none bg-gray-700/50 flex items-center justify-center">
+      <div className="flex flex-col mx-auto p-1 bg-white border-2 border-solid border-black rounded-md shadow-lg">
         <button type="button" className="border-solid border-2 border-black" onClick={props.onClose}>X</button>
         <form className="flex flex-col" onSubmit={handleSubmit}>
-          <input type="text" name="calories" placeholder="name" className="m-2 p-1" value={food.name} onChange={handleNameChange} />
-          <input type="number" name="calories" placeholder="calories" className="m-2 p-1" value={food.calories} onChange={handleCaloriesChange} />
-          <input type="number" name="carbohydrates" placeholder="carbohydrates" className="m-2 p-1" value={food.carbohydrates} onChange={handleCarbohydratesChange}/>
-          <input type="number" name="protein" placeholder="protein" className="m-2 p-1" value={food.protein} onChange={handleProteinChange}/>
-          <input type="number" name="fat" placeholder="fat" className="m-2 p-1" value={food.fat} onChange={handleFatChange}/>
+          <BaseInput name="name" type="text" placeholder="name" value={food.name} onChange={handleNameChange} />
+          <NumberInput name="calories" placeholder="calories" value={food.calories} onChange={handleCaloriesChange} />
+          <NumberInput name="carbohydrates" placeholder="carbohydrates" value={food.carbohydrates} onChange={handleCarbohydratesChange}/>
+          <NumberInput name="protein" placeholder="protein" value={food.protein} onChange={handleProteinChange}/>
+          <NumberInput name="fat" placeholder="fat" className="m-2 p-1" value={food.fat} onChange={handleFatChange}/>
           <AmountInput unitValue={food.unit} amountValue={food.amount} onUnitChange={handleUnitChange} onAmountChange={handleAmountChange}/>
           <button type="submit" className="border-solid border-2 border-black">Add</button>
         </form>
