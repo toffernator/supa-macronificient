@@ -47,7 +47,7 @@ export default function NewFoodPopup(props) {
       <div className="flex flex-col mx-auto p-1 bg-white border-2 border-solid border-black rounded-md shadow-lg">
         <div className="flex justify-between">
           <h2 className="m-2 p-1 text-xl">Add a New Food</h2>
-          <DangerButton onClick={props.onClose} text="X" />
+          <DangerButton onClick={props.onClose} text="X" className="basis-1/4" />
         </div>
         <form className="flex flex-col" onSubmit={handleSubmit}>
           <BaseInput name="name" type="text" placeholder="name" value={food.name} onChange={handleNameChange} />
@@ -57,7 +57,6 @@ export default function NewFoodPopup(props) {
           <NumberInput name="fat" placeholder="fat" className="m-2 p-1" value={food.fat} onChange={handleFatChange}/>
           <AmountInput unitValue={food.unit} amountValue={food.amount} onUnitChange={handleUnitChange} onAmountChange={handleAmountChange}/>
           <PrimaryButton type="submit" text="Add" />
-          {/* <button type="submit" className="border-solid border-2 border-black">Add</button> */}
         </form>
       </div>
     </div>

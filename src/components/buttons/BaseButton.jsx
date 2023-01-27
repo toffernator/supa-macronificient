@@ -19,7 +19,8 @@ BaseButton.propTypes = {
 BaseButton.defaultProps = {
   type: "button",
   onClick: (e) => {return e},
-  text: "Click Me!"
+  text: "Click Me!",
+  className: ""
 }
 
 export default BaseButton

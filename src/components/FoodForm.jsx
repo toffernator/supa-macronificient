@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient"
+import { getFood } from "../supabaseClient"
 import AmountInput from "./AmountInput";
 import BaseInput from "./inputs/BaseInput";
 import PrimaryButton from "./PrimaryButton";
@@ -35,24 +35,6 @@ export default function FoodForm(props) {
     } else {
       food = scaleFood(food, amount)
       props.onSubmit(food)
-    }
-  }
-  
-  const getFood = async (food) => {
-    try {
-      let { data, error, status } = await supabase
-        .from("foods")
-        .select("*")
-        .eq("name", food.toUpperCase())
-        .single()
-      
-      if (error && status !== 406) {
-        throw error
-      }
-
-      return data
-    } catch (error) {
-      alert(error.message)
     }
   }
 

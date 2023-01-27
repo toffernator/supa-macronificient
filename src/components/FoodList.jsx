@@ -2,7 +2,7 @@ import DangerButton from "./DangerButton.jsx"
 import { toCapatilized } from "../util"
 
 export default function FoodList(props) { return (
-    <ul className="h-3/5 overflow-auto">
+    <ul className="h-3/5 overflow-auto divide-y divide-solid">
       {props.foods.map((food, index) => 
         <ListItem key={index} food={food} handleItemDelete={props.handleItemDelete} index={index} />
       )}
@@ -15,10 +15,8 @@ function ListItem(props) {
     props.handleItemDelete(props.index)
   }
 
-  const titleCasedName = props.food.name.charAt(0) + props.food.name.substr(1).toLowerCase()
-
   return (
-    <li className="flex flex-row justify-between items-center">
+    <li className="flex flex-row justify-between items-center hover:shadow-md">
       <div className="flex flex-col">
         <h4 className="m-2 text-2xl">{toCapatilized(props.food.name)}</h4>
         <div className="flex items-center text-slate-500">
@@ -28,7 +26,7 @@ function ListItem(props) {
           <p className="mx-2 truncate">Fat: {props.food.fat.toFixed(1)}</p>
         </div>
       </div>
-      <DangerButton text="X" onClick={handleItemDelete} />
+      <DangerButton text="X" onClick={handleItemDelete} className="basis-1/4" />
     </li>
   );
 }

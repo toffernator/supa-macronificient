@@ -20,7 +20,8 @@ DangerButton.propTypes = {
 DangerButton.defaultProps = {
   type: "button",
   onClick: (e) => {return e},
-  text: "Careful!"
+  text: "Careful!",
+  className: ""
 }
 
 export default DangerButton
