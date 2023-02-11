@@ -26,7 +26,7 @@ async function uncachedGetFood(food) {
       .select("*")
       .eq("name", food)
       .single()
-    
+
     if (error && status !== 406) {
       throw error
     }
@@ -38,18 +38,6 @@ async function uncachedGetFood(food) {
 }
 
 export async function getUnits() {
-  let units
-  try {
-    units = getFromCache("UNITS")
-  } catch {
-    // Cache miss
-    units = await uncachedGetUnits()
-    cache("UNITS", units)
-  }
-  return units
-}
-
-async function uncachedGetUnits() {
   try {
     const { data, error, status } = await supabase
       .from("units")
@@ -58,12 +46,12 @@ async function uncachedGetUnits() {
     if (error && status !== 406) {
       throw error
     }
-    
-    let units = data.map((unit) => { 
-      return { value: unit.id, name: toCapatilized(unit.name)} 
+
+    let units = data.map((unit) => {
+      return { value: unit.id, name: toCapatilized(unit.name) }
     })
     return units
-  } catch(error) {
+  } catch (error) {
     alert(error)
   }
 }
@@ -77,7 +65,7 @@ function getFromCache(key) {
 }
 
 function cache(key, item) {
-    item.cachedOn = Date.now()
-    localStorage.setItem(key, JSON.stringify(item))
+  item.cachedOn = Date.now()
+  localStorage.setItem(key, JSON.stringify(item))
 }
 
