@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 const DangerButton = (props) => {
   return (
     <BaseButton
-      className={"text-white bg-red-600 rounded-lg" + " " + props.className}
+      className={"text-white bg-red-600 rounded-lg " + props.className}
       type={props.type} onClick={props.onClick} text={props.text}
     />
   )
@@ -19,7 +19,7 @@ DangerButton.propTypes = {
 
 DangerButton.defaultProps = {
   type: "button",
-  onClick: (e) => {return e},
+  onClick: (e) => { return e },
   text: "Careful!",
   className: ""
 }

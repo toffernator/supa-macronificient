@@ -8,8 +8,8 @@ import { supabase } from './supabaseClient';
 
 function App() {
   let [foods, setFoods] = useState([]);
-  let [isShowingPopup, setShowPopup] = useState(true)
-  
+  let [isShowingPopup, setShowPopup] = useState(false)
+
   const handleFoodFormSubmit = (food) => {
     setFoods([...foods, food])
   }
@@ -32,8 +32,8 @@ function App() {
     try {
       food.name = food.name.toUpperCase()
       const { error } = await supabase
-         .from("foods")
-         .insert(food)
+        .from("foods")
+        .insert(food)
 
       if (error) {
         throw error
@@ -45,30 +45,30 @@ function App() {
       alert(error)
     }
   }
-  
+
   const sumCalories = (foods) => {
-    return foods.reduce((total, food) => {return total + food.calories}, 0)
+    return foods.reduce((total, food) => { return total + food.calories }, 0)
   }
 
   const sumProtein = (foods) => {
-    return foods.reduce((total, food) => {return total + food.protein}, 0)
+    return foods.reduce((total, food) => { return total + food.protein }, 0)
   }
 
   const sumCarbohydrates = (foods) => {
-    return foods.reduce((total, food) => {return total + food.carbohydrates}, 0)
+    return foods.reduce((total, food) => { return total + food.carbohydrates }, 0)
   }
-  
+
   const sumFat = (foods) => {
-    return foods.reduce((total, food) => {return total + food.fat}, 0)
+    return foods.reduce((total, food) => { return total + food.fat }, 0)
   }
 
   return (
     <div className="container h-screen mx-auto">
       <div className="m-2 p-1 grid gap-4 grid-cols-2 grid-rows-2">
-        <Card title="calories" number={sumCalories(foods)}/>
-        <Card title="carbohydrate" number={sumCarbohydrates(foods)}/>
-        <Card title="protien" number={sumProtein(foods)}/>
-        <Card title="fat" number={sumFat(foods)}/>
+        <Card title="calories" number={sumCalories(foods)} />
+        <Card title="carbohydrate" number={sumCarbohydrates(foods)} />
+        <Card title="protien" number={sumProtein(foods)} />
+        <Card title="fat" number={sumFat(foods)} />
       </div>
       <FoodForm onSubmit={handleFoodFormSubmit} showPopup={handlePopupOpen} />
       {isShowingPopup && <NewFoodPopup onSubmit={handleNewFoodSubmit} onClose={handlePopupClose} />}

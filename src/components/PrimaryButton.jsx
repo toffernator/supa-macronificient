@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 const PrimaryButton = (props) => {
   return (
     <BaseButton
-      className={"text-white bg-gradient-to-r from-indigo-500 to-pink-500 rounded-lg" + " " + props.className} 
+      className={"text-white bg-gradient-to-r from-indigo-500 to-pink-500 rounded-lg " + props.className}
       type={props.type} text={props.text} onClick={props.onClick}
     />
   )
@@ -19,7 +19,7 @@ PrimaryButton.propTypes = {
 
 PrimaryButton.defaultProps = {
   type: "button",
-  onClick: (e) => {return e},
+  onClick: (e) => { return e },
   text: "Click Me!",
   className: ""
 }

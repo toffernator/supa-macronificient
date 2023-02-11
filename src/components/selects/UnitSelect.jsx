@@ -13,7 +13,7 @@ const UnitSelect = (props) => {
           (units) => setUnits(units)
         )
     }
-  }, [])
+  }, [units.length])
 
   return (
     <BaseSelect name={props.name} value={props.value} onChange={props.onChange} options={units} />
