@@ -27,6 +27,8 @@ async function uncachedGetFood(food) {
       .eq("name", food)
       .single()
 
+
+    // 406 errors will still be logged in the console
     if (error && status !== 406) {
       throw error
     }
@@ -65,6 +67,8 @@ function getFromCache(key) {
 }
 
 function cache(key, item) {
+  if (item === null) return
+
   item.cachedOn = Date.now()
   localStorage.setItem(key, JSON.stringify(item))
 }
