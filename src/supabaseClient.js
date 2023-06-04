@@ -28,7 +28,7 @@ async function uncachedGetFood(food) {
       .single()
 
 
-    // 406 errors will still be logged in the console
+    // 406 errors will still be logged in the console. They happoen when queries return no rows.
     if (error && status !== 406) {
       throw error
     }
